@@ -1,1 +1,436 @@
 
+/* ==========================================
+   NOVARA
+   Global Stylesheet
+   Version 1.0
+========================================== */
+
+/* ---------- CSS Variables ---------- */
+
+:root{
+
+    --black:#0D0D0D;
+    --charcoal:#232323;
+    --ivory:#F5F2EB;
+    --gold:#D4AF37;
+    --sand:#C9B89A;
+    --white:#FFFFFF;
+    --gray:#777;
+    --light-gray:#ECECEC;
+
+    --heading:'Playfair Display', serif;
+    --body:'Montserrat', sans-serif;
+
+    --transition:.35s ease;
+    --radius:12px;
+    --shadow:0 20px 45px rgba(0,0,0,.08);
+
+}
+
+/* ---------- Reset ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:var(--ivory);
+    color:var(--black);
+    font-family:var(--body);
+    overflow-x:hidden;
+    line-height:1.7;
+
+}
+
+img{
+
+    width:100%;
+    display:block;
+
+}
+
+a{
+
+    text-decoration:none;
+    color:inherit;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+section{
+
+    padding:110px 8%;
+
+}
+
+/* ---------- Typography ---------- */
+
+h1,h2,h3,h4{
+
+    font-family:var(--heading);
+    font-weight:700;
+    letter-spacing:.5px;
+
+}
+
+h1{
+
+    font-size:4.5rem;
+    line-height:1.1;
+
+}
+
+h2{
+
+    font-size:3rem;
+    margin-bottom:20px;
+
+}
+
+h3{
+
+    font-size:1.6rem;
+
+}
+
+p{
+
+    color:#555;
+    font-size:1rem;
+
+}
+
+/* ---------- Container ---------- */
+
+.container{
+
+    width:min(1200px,100%);
+    margin:auto;
+
+}
+
+/* ---------- Section Title ---------- */
+
+.section-title{
+
+    text-align:center;
+    margin-bottom:70px;
+
+}
+
+.section-title span{
+
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.8rem;
+
+}
+
+.section-title h2{
+
+    margin-top:15px;
+
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary,
+.btn-secondary{
+
+    display:inline-block;
+    padding:15px 36px;
+    border-radius:50px;
+    transition:var(--transition);
+    font-weight:600;
+
+}
+
+.btn-primary{
+
+    background:var(--black);
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--gold);
+    color:black;
+    transform:translateY(-3px);
+
+}
+
+.btn-secondary{
+
+    border:2px solid white;
+    color:white;
+
+}
+
+.btn-secondary:hover{
+
+    background:white;
+    color:black;
+
+}
+
+/* ---------- Header ---------- */
+
+header{
+
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index:999;
+    transition:.4s;
+
+}
+
+.navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:28px 8%;
+
+}
+
+.logo a{
+
+    font-family:var(--heading);
+    font-size:2rem;
+    font-weight:800;
+    letter-spacing:5px;
+
+}
+
+.nav-links{
+
+    display:flex;
+    gap:35px;
+
+}
+
+.nav-links a{
+
+    position:relative;
+    transition:var(--transition);
+
+}
+
+.nav-links a::after{
+
+    content:"";
+    position:absolute;
+    width:0;
+    height:2px;
+    left:0;
+    bottom:-7px;
+
+    background:var(--gold);
+    transition:.35s;
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
+}
+
+.nav-icons{
+
+    display:flex;
+    gap:22px;
+    font-size:1.1rem;
+
+}
+
+.nav-icons a:hover{
+
+    color:var(--gold);
+
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+
+    min-height:100vh;
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    color:white;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+
+}
+
+.hero-content{
+
+    position:relative;
+    z-index:2;
+    max-width:850px;
+
+}
+
+.subtitle{
+
+    text-transform:uppercase;
+    letter-spacing:5px;
+    color:var(--gold);
+
+}
+
+.hero p{
+
+    margin:30px auto;
+    color:#eee;
+    max-width:650px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+
+}
+
+/* ---------- Cards ---------- */
+
+.card{
+
+    background:white;
+    overflow:hidden;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    transition:.4s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+.card img{
+
+    height:340px;
+    object-fit:cover;
+
+}
+
+.card-content{
+
+    padding:30px;
+
+}
+
+/* ---------- Grid ---------- */
+
+.category-grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:40px;
+
+}
+
+/* ---------- Footer ---------- */
+
+footer{
+
+    background:var(--black);
+    color:white;
+    padding:70px 8%;
+
+}
+
+footer h3{
+
+    margin-bottom:20px;
+
+}
+
+footer p{
+
+    color:#ccc;
+
+}
+
+.footer-grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:50px;
+
+}
+
+.footer-links a{
+
+    display:block;
+    margin-bottom:12px;
+    color:#ddd;
+    transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+    color:var(--gold);
+
+}
+
+/* ---------- Scroll Bar ---------- */
+
+#progress-bar{
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:4px;
+
+    background:var(--gold);
+
+    z-index:9999;
+
+}
+
+/* ---------- Selection ---------- */
+
+::selection{
+
+    background:var(--gold);
+    color:black;
+
+                                                 }
