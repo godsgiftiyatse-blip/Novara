@@ -1,4 +1,4 @@
-// NOVARA MAIN JS (UPDATED FOR YOUR HTML STRUCTURE)
+// NOVARA MAIN JS — MOTION UPGRADE
 
 document.addEventListener("DOMContentLoaded", () => {
   initPageLoad();
@@ -6,10 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothScroll();
   initHoverEffects();
   initScrollProgress();
+  initRevealAnimations();
 });
 
 /* ---------------------------
-   PAGE LOAD
+   PAGE LOAD (CLEAN INTRO)
 ---------------------------- */
 function initPageLoad() {
   document.body.classList.add("is-loading");
@@ -18,12 +19,30 @@ function initPageLoad() {
     setTimeout(() => {
       document.body.classList.remove("is-loading");
       document.body.classList.add("is-loaded");
+
+      // trigger hero animation after load
+      animateHero();
     }, 500);
   });
 }
 
 /* ---------------------------
-   NAVBAR (FIXED SELECTOR)
+   HERO ANIMATION (NEW)
+---------------------------- */
+function animateHero() {
+  const subtitle = document.querySelector(".subtitle");
+  const title = document.querySelector(".hero h1");
+  const paragraph = document.querySelector(".hero p");
+  const buttons = document.querySelector(".hero-buttons");
+
+  if (subtitle) subtitle.style.animation = "fadeUp 0.8s ease forwards";
+  if (title) title.style.animation = "fadeUp 1s ease 0.2s forwards";
+  if (paragraph) paragraph.style.animation = "fadeUp 1s ease 0.4s forwards";
+  if (buttons) buttons.style.animation = "fadeUp 1s ease 0.6s forwards";
+}
+
+/* ---------------------------
+   NAVBAR BEHAVIOR (REFINED)
 ---------------------------- */
 function initNavbar() {
   const nav = document.querySelector(".navbar");
@@ -34,14 +53,12 @@ function initNavbar() {
   window.addEventListener("scroll", () => {
     const currentScrollY = window.scrollY;
 
-    // hide on scroll down
-    if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
       nav.classList.add("nav-hidden");
     } else {
       nav.classList.remove("nav-hidden");
     }
 
-    // blur / background effect
     if (currentScrollY > 50) {
       nav.classList.add("nav-scrolled");
     } else {
@@ -53,7 +70,7 @@ function initNavbar() {
 }
 
 /* ---------------------------
-   SMOOTH SCROLL
+   SMOOTH SCROLL (IMPROVED FEEL)
 ---------------------------- */
 function initSmoothScroll() {
   const links = document.querySelectorAll('a[href^="#"]');
@@ -66,7 +83,7 @@ function initSmoothScroll() {
       e.preventDefault();
 
       window.scrollTo({
-        top: target.offsetTop - 70,
+        top: target.offsetTop - 80,
         behavior: "smooth"
       });
     });
@@ -74,25 +91,23 @@ function initSmoothScroll() {
 }
 
 /* ---------------------------
-   SCROLL PROGRESS BAR (NEW)
+   SCROLL PROGRESS BAR
 ---------------------------- */
 function initScrollProgress() {
-  const progressBar = document.getElementById("progress-bar");
-
-  if (!progressBar) return;
+  const bar = document.getElementById("progress-bar");
+  if (!bar) return;
 
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY;
     const docHeight = document.body.scrollHeight - window.innerHeight;
 
     const progress = (scrollTop / docHeight) * 100;
-
-    progressBar.style.width = progress + "%";
+    bar.style.width = progress + "%";
   });
 }
 
 /* ---------------------------
-   HOVER EFFECTS (SAFE VERSION)
+   HOVER EFFECTS (LUXURY FEEL)
 ---------------------------- */
 function initHoverEffects() {
   const cards = document.querySelectorAll(".card");
@@ -105,5 +120,27 @@ function initHoverEffects() {
     card.addEventListener("mouseleave", () => {
       card.classList.remove("hover-active");
     });
+  });
+}
+
+/* ---------------------------
+   SCROLL REVEAL (NEW CORE UPGRADE)
+---------------------------- */
+function initRevealAnimations() {
+  const elements = document.querySelectorAll(".card, .section-title");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal-active");
+      }
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  elements.forEach(el => {
+    el.classList.add("reveal");
+    observer.observe(el);
   });
 }
