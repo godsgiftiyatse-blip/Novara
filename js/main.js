@@ -1,35 +1,32 @@
-// NOVARA MAIN JS
-// Premium foundation script for interactions + UI behavior
+// NOVARA MAIN JS (UPDATED FOR YOUR HTML STRUCTURE)
 
 document.addEventListener("DOMContentLoaded", () => {
   initPageLoad();
   initNavbar();
   initSmoothScroll();
   initHoverEffects();
+  initScrollProgress();
 });
 
 /* ---------------------------
-   PAGE LOAD EXPERIENCE
+   PAGE LOAD
 ---------------------------- */
 function initPageLoad() {
-  const body = document.body;
-
-  // simple preload class system (we'll upgrade later with real loader)
-  body.classList.add("is-loading");
+  document.body.classList.add("is-loading");
 
   window.addEventListener("load", () => {
     setTimeout(() => {
-      body.classList.remove("is-loading");
-      body.classList.add("is-loaded");
-    }, 600);
+      document.body.classList.remove("is-loading");
+      document.body.classList.add("is-loaded");
+    }, 500);
   });
 }
 
 /* ---------------------------
-   NAVBAR BEHAVIOR
+   NAVBAR (FIXED SELECTOR)
 ---------------------------- */
 function initNavbar() {
-  const nav = document.querySelector("nav");
+  const nav = document.querySelector(".navbar");
   if (!nav) return;
 
   let lastScrollY = window.scrollY;
@@ -37,14 +34,14 @@ function initNavbar() {
   window.addEventListener("scroll", () => {
     const currentScrollY = window.scrollY;
 
-    // subtle hide/show on scroll (premium feel)
+    // hide on scroll down
     if (currentScrollY > lastScrollY && currentScrollY > 80) {
       nav.classList.add("nav-hidden");
     } else {
       nav.classList.remove("nav-hidden");
     }
 
-    // background blur effect on scroll
+    // blur / background effect
     if (currentScrollY > 50) {
       nav.classList.add("nav-scrolled");
     } else {
@@ -56,23 +53,20 @@ function initNavbar() {
 }
 
 /* ---------------------------
-   SMOOTH SCROLL (CUSTOM)
-   Lightweight version (no library)
+   SMOOTH SCROLL
 ---------------------------- */
 function initSmoothScroll() {
   const links = document.querySelectorAll('a[href^="#"]');
 
   links.forEach(link => {
     link.addEventListener("click", (e) => {
-      const targetId = link.getAttribute("href");
-      const targetEl = document.querySelector(targetId);
-
-      if (!targetEl) return;
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
 
       e.preventDefault();
 
       window.scrollTo({
-        top: targetEl.offsetTop - 60,
+        top: target.offsetTop - 70,
         behavior: "smooth"
       });
     });
@@ -80,34 +74,36 @@ function initSmoothScroll() {
 }
 
 /* ---------------------------
-   HOVER EFFECTS FOUNDATION
-   (for luxury micro-interactions later)
+   SCROLL PROGRESS BAR (NEW)
 ---------------------------- */
-function initHoverEffects() {
-  const hoverItems = document.querySelectorAll(".hover-item");
+function initScrollProgress() {
+  const progressBar = document.getElementById("progress-bar");
 
-  hoverItems.forEach(item => {
-    item.addEventListener("mouseenter", () => {
-      item.classList.add("is-hovered");
-    });
+  if (!progressBar) return;
 
-    item.addEventListener("mouseleave", () => {
-      item.classList.remove("is-hovered");
-    });
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+
+    const progress = (scrollTop / docHeight) * 100;
+
+    progressBar.style.width = progress + "%";
   });
 }
 
 /* ---------------------------
-   FUTURE MODULE PLACEHOLDERS
-   (we will expand later)
+   HOVER EFFECTS (SAFE VERSION)
 ---------------------------- */
+function initHoverEffects() {
+  const cards = document.querySelectorAll(".card");
 
-// Cursor system (luxury custom cursor later)
-function initCustomCursor() {
-  // reserved for GSAP / advanced UX later
-}
+  cards.forEach(card => {
+    card.addEventListener("mouseenter", () => {
+      card.classList.add("hover-active");
+    });
 
-// Scroll animations system
-function initScrollAnimations() {
-  // reserved for intersection observer / GSAP later
+    card.addEventListener("mouseleave", () => {
+      card.classList.remove("hover-active");
+    });
+  });
 }
